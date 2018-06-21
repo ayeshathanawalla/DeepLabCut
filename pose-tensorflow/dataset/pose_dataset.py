@@ -57,6 +57,7 @@ class PoseDataset:
     def load_dataset(self):
         cfg = self.cfg
         file_name = cfg.dataset
+        print("file_name ", file_name)
         # Load Matlab file dataset annotation
         mlab = sio.loadmat(file_name)
         self.raw_data = mlab
@@ -75,12 +76,13 @@ class PoseDataset:
             item.im_size = sample[1][0]
             if len(sample) >= 3:
                 joints = sample[2][0][0]
-                joint_id = joints[:, 0]
-                # make sure joint ids are 0-indexed
-                if joint_id.size != 0:
-                    assert((joint_id < cfg.num_joints).any())
-                joints[:, 0] = joint_id
-                item.joints = [joints]
+                if len(joints) > 0:
+                    joint_id = joints[:, 0]
+                    # make sure joint ids are 0-indexed
+                    if joint_id.size != 0:
+                        assert((joint_id < cfg.num_joints).any())
+                    joints[:, 0] = joint_id
+                    item.joints = [joints]
             else:
                 has_gt = False
             if cfg.crop:
