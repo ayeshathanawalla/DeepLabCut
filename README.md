@@ -56,20 +56,24 @@ The general pipeline for first time use is:
 
      - Please also install:
 
-        - Working environment: You may install an IDE and/or Jupyter Notebook. We worked directly on shell using virtualenv along with byobu/screen to connect and detach from session remotely via SSH
+        - Working environment: You may install an IDE and/or Jupyter Notebook. We worked directly on shell using virtualenv along with byobu or screen to connect and detach from session remotely via SSH while training was going on.
 
         - You will also need to install the following Python packages (in the terminal type):
+
           $ pip3 install scipy scikit-image matplotlib pyyaml easydict
           $ pip3 install moviepy imageio tqdm tables
           $ pip3 install pandas
 
         - Install video processing capability
+
           $ sudo apt-get install ffmpeg
 
         - Install python3-tk
+        
           $ sudo apt-get install python3-tk
 
         - We are working from an older version of the original code provided by Mathis et al. You can use either
+
           $ # git clone https://github.com/AlexEMG/DeepLabCut.git # Original branch
           $ git clone git@github.com:ayeshathanawalla/DeepLabCut.git # Chen lab modified version
       
