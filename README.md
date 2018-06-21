@@ -1,12 +1,12 @@
 # DeepLabCut
 
-A toolbox for markerless tracking of body parts of animals in lab settings performing various tasks, like [trail tracking](https://vnmurthylab.org/),  [reaching in mice](http://www.mousemotorlab.org/) and various drosophila behaviors (see [Mathis et al.](https://arxiv.org/abs/1804.03142v1) for details). There is, however, nothing specific that makes the toolbox only applicable to these tasks or species (the toolbox has also already been successfully applied to rats and zebrafish).  
+This is the ChenLab version of the super toolbox for markerless tracking of body parts of animals in lab settings performing various tasks, like [trail tracking](https://vnmurthylab.org/),  [reaching in mice](http://www.mousemotorlab.org/) and various drosophila behaviors (see [Mathis et al.](https://arxiv.org/abs/1804.03142v1) for details). Many thanks to Alexander Mathis, Pranav Mamidanna, Taiga Abe, Kevin M. Cury, Venkatesh N. Murthy, Mackenzie W. Mathis* and Matthias Bethge*.
 
 <p align="center">
 <img src="/Documentation/githubfig-01-01.png" width="90%">
 </p>
 
-Please see www.mousemotorlab.org/deeplabcut for video demonstrations of automated tracking.
+Please see www.mousemotorlab.org/deeplabcut for video demonstrations of automated tracking of the original code.
 
 This work utilizes the feature detectors (ResNet + readout layers) of one of the state-of-the-art algorithms for human pose estimation by [Insafutdinov et al.](https://arxiv.org/abs/1605.03170), called DeeperCut, which inspired the name for our toolbox (see references below).
 
