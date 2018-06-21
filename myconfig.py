@@ -9,24 +9,47 @@
 
 ########################################
 # Step 1:
-Task = 'reaching'
 ########################################
 
-# Filename and path to behavioral video:
-vidpath = '.'
-filename = 'reachingvideo1.avi'
 
-cropping = True
+########################################
+# For right videos
+########################################
+
+Task = 'reaching-right'
+
+# File path to behavioral video:
+vidpath = '/media/shantanuray/74B60C4CB60C10F2/MouseReachingVideos/trainingset/right'
 
 # ROI dimensions / bounding box (only used if cropping == True)
 # x1,y1 indicates the top left corner and
 # x2,y2 is the lower right corner of the croped region.
 
-x1 = 0
-x2 = 640
-y1 = 277
-y2 = 624
+x1 = 120
+x2 = 400
+y1 = 160
+y2 = 400
 
+########################################
+# For left videos
+########################################
+# Task = 'reaching-left'
+
+# vidpath = '/media/shantanuray/74B60C4CB60C10F2/MouseReachingVideos/trainingset/left'
+
+# x1 = 320
+# x2 = 600
+# y1 = 160
+# y2 = 400
+
+########################################
+# Common for either left or right
+########################################
+
+# File name of behavioral video to sample images and crop for training
+filename = '22UN_ONI_US_N_47_20180606T1518.mov'
+
+cropping = True
 
 # Portion of the video to sample from in step 1. Set to 1 by default.
 portion = 1
@@ -35,11 +58,10 @@ portion = 1
 # Step 2:
 ########################################
 
-bodyparts = ["hand", "Finger1", "Finger2",
-             "Joystick"]  # Exact sequence of labels as were put by
+bodyparts = ["hand", "wrist", "nose", "littlefinger", "index"]  # Exact sequence of labels as were put by
 
 # annotator in *.csv file
-Scorers = ['Mackenzie']  # who is labeling?
+Scorers = ['Ayesha']  # who is labeling?
 
 # When importing the images and the labels in the csv/xls files should be in the same order!
 # During labeling in Fiji one can thus (for occluded body parts) click in the origin of the image 
@@ -51,12 +73,12 @@ invisibleboundary=10 # If labels are closer to origin than this number they are 
 # Step 3:
 ########################################
 
-date = 'Jan30'
-scorer = 'Mackenzie'
+date = '14-Jun-2018'
+scorer = 'Ayesha'
 
 # Userparameters for training set. Other parameters can be set in pose_cfg.yaml
-Shuffles = [1]  # Ids for shuffles, i.e. range(5) for 5 shuffles
-TrainingFraction = [0.95]  # Fraction of labeled images used for training
+Shuffles = [5]  # Ids for shuffles, i.e. range(5) for 5 shuffles
+TrainingFraction = [0.80]  # Fraction of labeled images used for training
 
 # Which resnet to use
 # (these are parameters reflected in the pose_cfg.yaml file)
