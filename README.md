@@ -42,9 +42,7 @@ The general pipeline for first time use is:
      - Google Cloud: Create an account on Google Cloud. Install the Google Cloud SDK on your local machine. And then run the following commands to create a new server instance.
 
       $ gcloud init # Init local machine to Google Cloud account
-
       $ gcloud compute instances create tensor-gpu --machine-type n1-standard-4 --zone us-central1-c --boot-disk-size 30GB --boot-disk-type=pd-ssd --accelerator type=nvidia-tesla-k80,count=1 --image-family ubuntu-1604-lts --image-project ubuntu-os-cloud --maintenance-policy TERMINATE --restart-on-failure # Create instance
-
       $ gcloud compute config-ssh # Allow connection via SSH
 
      - Installation of Tensorflow and nVidia libraries: Currently, tensorflow supports CUDA 9.0 only - DO NOT use higher version. We used 9.0.176. CUDA package for 9.0 is only supported by Ubuntu 16.04 - so do not use higher version. Also, do not use Debian. Similarly, current tensorflow support is restricted to cuDNN 7.0. DO NOT use higher version. We used 7.0.5. And as per tensorflow documentation - to avoid cuDNN version conflicts during later system upgrades, hold the cuDNN version at 7.0.5.
@@ -56,26 +54,26 @@ The general pipeline for first time use is:
 
      - Please also install:
 
-        - Working environment: You may install an IDE and/or Jupyter Notebook. We worked directly on shell using virtualenv along with byobu or screen to connect and detach from session remotely via SSH while training was going on.
+       - Working environment: You may install an IDE and/or Jupyter Notebook. We worked directly on shell using virtualenv along with byobu or screen to connect and detach from session remotely via SSH while training was going on.
 
-        - You will also need to install the following Python packages (in the terminal type):
+       - You will also need to install the following Python packages (in the terminal type):
 
-          $ pip3 install scipy scikit-image matplotlib pyyaml easydict
-          $ pip3 install moviepy imageio tqdm tables
-          $ pip3 install pandas
+        $ pip3 install scipy scikit-image matplotlib pyyaml easydict
+        $ pip3 install moviepy imageio tqdm tables
+        $ pip3 install pandas
 
-        - Install video processing capability
+       - Install video processing capability
 
-          $ sudo apt-get install ffmpeg
+        $ sudo apt-get install ffmpeg
 
-        - Install python3-tk
+       - Install python3-tk
         
-          $ sudo apt-get install python3-tk
+        $ sudo apt-get install python3-tk
 
-        - We are working from an older version of the original code provided by Mathis et al. You can use either
+       - We are working from an older version of the original code provided by Mathis et al. You can use either
 
-          $ # git clone https://github.com/AlexEMG/DeepLabCut.git # Original branch
-          $ git clone git@github.com:ayeshathanawalla/DeepLabCut.git # Chen lab modified version
+        $ # git clone https://github.com/AlexEMG/DeepLabCut.git # Original branch
+        $ git clone git@github.com:ayeshathanawalla/DeepLabCut.git # Chen lab modified version
       
 
 # Test the Toolbox installation & code:
@@ -97,7 +95,9 @@ In the folder "Generating_a_Training_Set", the provided code allows you to selec
    - Number of frames per video: Update the variable 'numframes2pick' to how many frames you want to sample from the video
      TODO Move numframes2pick to myconfig
    - **Shell users:**
+
       $ cd Generating_a_Training_Set
+   
       $ python3 Step1_SelectRandomFrames_fromVideos.py
    - **IDE users:**
 
@@ -126,6 +126,7 @@ Generally speaking, one should create a training set that reflects the diversity
 **(3) Formating the data I:**
 
   - **Shell users:**
+
       $ python3 Step2_ConvertingLabels2DataFrame.py
   - **IDE users:**
  The code "Step2_ConvertingLabels2DataFrame.py" creates a data structure in [pandas](https://pandas.pydata.org/) (stored as .h5 and .csv) combining the various labels together with the (local) file path of the images. This data structure also keeps track of who labeled the data and allows to combine data from multiple labelers. Keep in mind that ".csv" files for each bodyparts listed in the myconfig.py file should exist in the folder alongside the individual images.
@@ -136,12 +137,14 @@ Generally speaking, one should create a training set that reflects the diversity
      
  After this step, you may **check** if the data was loaded correctly and all the labels are properly placed (Use "Step3_CheckLabels.py").
    - **Shell users:**
+
       $ python3 Step3_CheckLabels.py
    - **Juypter Users:** use the Step3_.._demo.ipynb file
 
 **(5) Formating the data II:** Next split the labeled data into test and train sets for benchmarking ("Step4_GenerateTrainingFileFromLabelledData.py"). This step will create a ".mat" file, which is used by DeeperCut as well as a ".yaml" file containing meta information with regard to the parameters of the DeeperCut. Before this step consider changing the parameters in 'pose_cfg.yaml'.  This file also contains short descriptions of what these parameters mean. Generally speaking pos_dist_thresh and global_scale will be of most importance. Then run the code. This file will create a folder with the training data as well as a folder for training the corresponding model in DeeperCut. 
 
    - **Shell users:**
+
       $ python3 Step4_GenerateTrainingFileFromLabelledData.py
    - **Juypter Users:** use the Step4_.._demo.ipynb file
 
