@@ -31,7 +31,7 @@ import matplotlib.pyplot as plt
 
 Labels = ['.', '+', '*']  # order of labels for different scorers
 
-Colorscheme = ['r', 'g', 'y', 'b', 'm', 'r', 'g', 'y',
+Colorscheme = ['r', 'g', 'Y', 'b', 'm', 'r', 'g', 'Y',
                'b']  # colors for those bodyparts.
 unvisibleboundary = 100  # see metadata / when bodypart not visible!
 
@@ -107,8 +107,8 @@ for folder in folders:
                 print("Creating images with labels by ", scorer)		
             for c, bp in enumerate(comparisonbodyparts):
                 plt.plot(
-                    DataCombined[scorer][bp]['x'].values[imindex],
-                    DataCombined[scorer][bp]['y'].values[imindex],
+                    DataCombined[scorer][bp]['X'].values[imindex],
+                    DataCombined[scorer][bp]['Y'].values[imindex],
                     Labels[cc],
                     color=Colorscheme[c],
                     alpha=.5,
