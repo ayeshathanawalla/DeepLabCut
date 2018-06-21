@@ -54,24 +54,24 @@ The general pipeline for first time use is:
 
      - Please also install:
 
-       - Working environment: You may install an IDE and/or Jupyter Notebook. We worked directly on shell using virtualenv along with byobu or screen to connect and detach from session remotely via SSH while training was going on.
+     -- Working environment: You may install an IDE and/or Jupyter Notebook. We worked directly on shell using virtualenv along with byobu or screen to connect and detach from session remotely via SSH while training was going on.
 
-       - You will also need to install the following Python packages (in the terminal type):
+     -- You will also need to install the following Python packages (in the terminal type):
 
         $ pip3 install scipy scikit-image matplotlib pyyaml easydict
         $ pip3 install moviepy imageio tqdm tables
         $ pip3 install pandas
 
-       - Install video processing capability
+     -- Install video processing capability
 
         $ sudo apt-get install ffmpeg
 
-       - Install python3-tk
+     -- Install python3-tk
         
         $ sudo apt-get install python3-tk
 
-       - We are working from an older version of the original code provided by Mathis et al. You can use either
-
+     -- We are working from an older version of the original code provided by Mathis et al. You can use either
+     
         $ # git clone https://github.com/AlexEMG/DeepLabCut.git # Original branch
         $ git clone git@github.com:ayeshathanawalla/DeepLabCut.git # Chen lab modified version
       
@@ -91,14 +91,15 @@ Open the **"myconfig.py"** file and set the global variables for your dataset. (
      - Use cropping = True to help reduce the training time. This will allow the training algorithm to focus only in the region of interest (ROI). It's okay if you do not know the (x1, y1, x2, y2) coordinates for the ROI yet. Instructions are provided in Step 1. You may have to go back and forth between Step 1 and updating the coordinates till you achieve your desired ROI. 
 
 **(1) Sampling the video to create training/ testing data:** 
-In the folder "Generating_a_Training_Set", the provided code allows you to select a subset of frames in a video(s) for labeling. Make sure videos you want to use for the training set are in a sub-folder under "Generating_a_Training_Set" or change the video path accordingly in **"myconfig.py"*. 
-   - Number of frames per video: Update the variable 'numframes2pick' to how many frames you want to sample from the video
+In the folder "Generating_a_Training_Set", the provided code allows you to select a subset of frames in a video(s) for labeling. Make sure videos you want to use for the training set are in a sub-folder under "Generating_a_Training_Set" or change the video path accordingly in **"myconfig.py"**.
+
+   - Number of frames per video: Update the variable **"numframes2pick"** to how many frames you want to sample from the video
      TODO Move numframes2pick to myconfig
+     
    - **Shell users:**
 
-      $ cd Generating_a_Training_Set
-   
-      $ python3 Step1_SelectRandomFrames_fromVideos.py
+    $ cd Generating_a_Training_Set
+    $ python3 Step1_SelectRandomFrames_fromVideos.py
    - **IDE users:**
 
      - Open "Step1_SelectRandomFrames_fromVideos.py" and crop videos if behavior of interest only happens in subset of frame (see Step1_SelectRandomFrames_fromVideos.py for detailed instructions; edit in Spyder or your favorite integrated development environment (IDE) an run the script). 
@@ -126,8 +127,8 @@ Generally speaking, one should create a training set that reflects the diversity
 **(3) Formating the data I:**
 
   - **Shell users:**
-
-      $ python3 Step2_ConvertingLabels2DataFrame.py
+  
+        $ python3 Step2_ConvertingLabels2DataFrame.py
   - **IDE users:**
  The code "Step2_ConvertingLabels2DataFrame.py" creates a data structure in [pandas](https://pandas.pydata.org/) (stored as .h5 and .csv) combining the various labels together with the (local) file path of the images. This data structure also keeps track of who labeled the data and allows to combine data from multiple labelers. Keep in mind that ".csv" files for each bodyparts listed in the myconfig.py file should exist in the folder alongside the individual images.
 
@@ -138,14 +139,14 @@ Generally speaking, one should create a training set that reflects the diversity
  After this step, you may **check** if the data was loaded correctly and all the labels are properly placed (Use "Step3_CheckLabels.py").
    - **Shell users:**
 
-      $ python3 Step3_CheckLabels.py
+    $ python3 Step3_CheckLabels.py
    - **Juypter Users:** use the Step3_.._demo.ipynb file
 
 **(5) Formating the data II:** Next split the labeled data into test and train sets for benchmarking ("Step4_GenerateTrainingFileFromLabelledData.py"). This step will create a ".mat" file, which is used by DeeperCut as well as a ".yaml" file containing meta information with regard to the parameters of the DeeperCut. Before this step consider changing the parameters in 'pose_cfg.yaml'.  This file also contains short descriptions of what these parameters mean. Generally speaking pos_dist_thresh and global_scale will be of most importance. Then run the code. This file will create a folder with the training data as well as a folder for training the corresponding model in DeeperCut. 
 
    - **Shell users:**
 
-      $ python3 Step4_GenerateTrainingFileFromLabelledData.py
+    $ python3 Step4_GenerateTrainingFileFromLabelledData.py
    - **Juypter Users:** use the Step4_.._demo.ipynb file
 
    - The output will be two folders for train and test data (with their respective yaml files)
@@ -160,7 +161,7 @@ The folder pose-tensorflow contains an earlier, minimal yet sufficient for our p
 Next copy the two folders generated in step **(5) Formating the data II** into the **models** folder of pose-tensorflow (i.e. pose-tensorflow/models/). We have already done this for the example project, which you will find there. Then (in a terminal) navigate to the subfolder "train" of the machine file, i.e. in our case and then start training (good luck!)
 
      $ cd pose-tensorflow/models
-     $  cp -R ../Generating_a_Training_Set/<Task><date>-trainset<TrainingFraction>shuffle<Shuffles>/ .
+     $ cp -R ../Generating_a_Training_Set/<Task><date>-trainset<TrainingFraction>shuffle<Shuffles>/ .
      $ cp -R UnaugmentedDataSet_<Task><date>/ .
      $ cd pose-tensorflow/models/reachingJan30-trainset95shuffle1/train
      $ TF_CUDNN_USE_AUTOTUNE=0 CUDA_VISIBLE_DEVICES=0 python3 ../../../train.py 
@@ -185,9 +186,11 @@ After successfully training and finding low generalization error for the network
    - To begin, first edit the myconfig_analysis.py file 
      
    - For extracting posture from a folder with videos run:
-      $ CUDA_VISIBLE_DEVICES=0 python3 AnalyzeVideos.py
+   
+    $ CUDA_VISIBLE_DEVICES=0 python3 AnalyzeVideos.py
    - For making labeled videos (For validation only) 
-      $ python3 MakingLabeledVideo.py
+   
+    $ python3 MakingLabeledVideo.py
 
 # Contribute:
 
