@@ -7,7 +7,7 @@ all_joints_names: willbeautomaticallyupdatedbyStep3code
 
 # all locations within this distance threshold are considered
 # positive training samples for detector
-pos_dist_thresh: 17
+pos_dist_thresh: 5
 
 # all images in the dataset will be rescaled by the following
 # scaling factor to be processed by the CNN. You can select the
