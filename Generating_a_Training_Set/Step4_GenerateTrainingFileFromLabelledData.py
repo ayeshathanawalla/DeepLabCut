@@ -122,10 +122,10 @@ for shuffle in Shuffles:
             indexjoints=0
             joints=np.zeros((len(bodyparts),3))*np.nan
             for bpindex,bodypart in enumerate(bodyparts):
-                if Data[bodypart]['x'][jj]<np.shape(im)[1] and Data[bodypart]['y'][jj]<np.shape(im)[0]: #are labels in image?
+                if Data[bodypart]['X'][jj]<np.shape(im)[1] and Data[bodypart]['Y'][jj]<np.shape(im)[0]: #are labels in image?
                     	joints[indexjoints,0]=int(bpindex)    
-                    	joints[indexjoints,1]=Data[bodypart]['x'][jj]
-                    	joints[indexjoints,2]=Data[bodypart]['y'][jj]       
+                    	joints[indexjoints,1]=Data[bodypart]['X'][jj]
+                    	joints[indexjoints,2]=Data[bodypart]['Y'][jj]       
                     	indexjoints+=1
 
             joints = joints[np.where(
