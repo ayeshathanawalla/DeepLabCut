@@ -160,7 +160,7 @@ for shuffle in Shuffles:
                 )  # NOTE: thereby     cfg_test['all_joints_names'] should be same order as bodyparts!
 
             index = pd.MultiIndex.from_product(
-                [[scorer], cfg['all_joints_names'], ['x', 'y', 'likelihood']],
+                [[scorer], cfg['all_joints_names'], ['X', 'Y', 'likelihood']],
                 names=['scorer', 'bodyparts', 'coords'])
 
             # Saving results:

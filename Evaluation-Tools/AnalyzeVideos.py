@@ -101,7 +101,7 @@ scorer = 'DeepCut' + "_resnet" + str(resnet) + "_" + Task + str(
 cfg['init_weights'] = modelfolder + '/train/' + Snapshots[snapshotindex]
 sess, inputs, outputs = predict.setup_pose_prediction(cfg)
 pdindex = pd.MultiIndex.from_product(
-    [[scorer], cfg['all_joints_names'], ['x', 'y', 'likelihood']],
+    [[scorer], cfg['all_joints_names'], ['X', 'Y', 'likelihood']],
     names=['scorer', 'bodyparts', 'coords'])
 
 ##################################################
@@ -112,7 +112,7 @@ pdindex = pd.MultiIndex.from_product(
 
 os.chdir(videofolder)
 
-videos = np.sort([fn for fn in os.listdir(os.curdir) if (".avi" in fn)])
+videos = np.sort([fn for fn in os.listdir(os.curdir) if (".mov" in fn)])
 print("Starting ", videofolder, videos)
 for video in videos:
     dataname = video.split('.')[0] + scorer + '.h5'

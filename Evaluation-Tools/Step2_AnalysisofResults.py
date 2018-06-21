@@ -32,15 +32,15 @@ def pairwisedistances(DataCombined, scorer1, scorer2, bodyparts=None):
         Pointwisesquareddistance = (
             DataCombined[scorer1] - DataCombined[scorer2])**2
         MSE = np.sqrt(
-            Pointwisesquareddistance.xs('x', level=1, axis=1) +
-            Pointwisesquareddistance.xs('y', level=1, axis=1))
+            Pointwisesquareddistance.xs('X', level=1, axis=1) +
+            Pointwisesquareddistance.xs('Y', level=1, axis=1))
         return MSE
     else:  # calculationg MSE only for specific bodyparts / given by list
         Pointwisesquareddistance = (DataCombined[scorer1][bodyparts] -
                                     DataCombined[scorer2][bodyparts])**2
         MSE = np.sqrt(
-            Pointwisesquareddistance.xs('x', level=1, axis=1) +
-            Pointwisesquareddistance.xs('y', level=1, axis=1))
+            Pointwisesquareddistance.xs('X', level=1, axis=1) +
+            Pointwisesquareddistance.xs('Y', level=1, axis=1))
         return MSE
 
 

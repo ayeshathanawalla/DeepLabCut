@@ -70,7 +70,7 @@ scorer = 'DeepCut' + "_resnet" + str(resnet) + "_" + Task + str(
 
 os.chdir(videofolder)
 
-videos = np.sort([fn for fn in os.listdir(os.curdir) if (".avi" in fn)])
+videos = np.sort([fn for fn in os.listdir(os.curdir) if (".mov" in fn)])
 print("Starting ", videofolder, videos)
 for video in videos:
     vname = video.split('.')[0]
@@ -123,8 +123,8 @@ for video in videos:
                 for bpindex, bp in enumerate(bodyparts2plot):
                     if Dataframe[scorer][bp]['likelihood'].values[index] > pcutoff:
                         plt.scatter(
-                            Dataframe[scorer][bp]['x'].values[index],
-                            Dataframe[scorer][bp]['y'].values[index],
+                            Dataframe[scorer][bp]['X'].values[index],
+                            Dataframe[scorer][bp]['Y'].values[index],
                             color=colors(bpindex),
                             alpha=.2)
 
