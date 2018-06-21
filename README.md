@@ -39,37 +39,39 @@ The general pipeline for first time use is:
 - Hardware:
      - Server: For reference, we use Ubuntu 16.04 Google Cloud n1-standard-4 machine (4 CPUs + 15GB RAM) with virtualenv to isolate the python packages including TensorFlow. You will need a GPU - reduces the training from days to a few hours. We used nVidia-Tesla-K80, which is the easiest standard GPU that gets alloted to you on Google Cloud.
 
-     - Google Cloud: Create an account on Google Cloud. Install the Google Cloud SDK on your local machine. And then run the following commands to create a new server instance
+     - Google Cloud: Create an account on Google Cloud. Install the Google Cloud SDK on your local machine. And then run the following commands to create a new server instance.
 
-       $ gcloud init # Init local machine to Google Cloud account
+      $ gcloud init # Init local machine to Google Cloud account
 
-       $ gcloud compute instances create tensor-gpu --machine-type n1-standard-4 --zone us-central1-c --boot-disk-size 30GB --boot-disk-type=pd-ssd --accelerator type=nvidia-tesla-k80,count=1 --image-family ubuntu-1604-lts --image-project ubuntu-os-cloud --maintenance-policy TERMINATE --restart-on-failure # Create instance
-       
-       $ gcloud compute config-ssh # Allow connection via SSH
+      $ gcloud compute instances create tensor-gpu --machine-type n1-standard-4 --zone us-central1-c --boot-disk-size 30GB --boot-disk-type=pd-ssd --accelerator type=nvidia-tesla-k80,count=1 --image-family ubuntu-1604-lts --image-project ubuntu-os-cloud --maintenance-policy TERMINATE --restart-on-failure # Create instance
 
-     - Installation of Tensorflow and nVidia libraries: Currently, tensorflow supports CUDA 9.0 only - DO NOT use higher version. We used 9.0.176. CUDA package for 9.0 is only supported by Ubuntu 16.04 - so do not use higher version. Also, do not use Debian. Similarly, current tensorflow support is restricted to cuDNN 7.0. DO NOT use higher version. We used 7.0.5. And as per tensorflow documentation - to avoid cuDNN version conflicts during later system upgrades, hold the cuDNN version at 7.0.5
+      $ gcloud compute config-ssh # Allow connection via SSH
+
+     - Installation of Tensorflow and nVidia libraries: Currently, tensorflow supports CUDA 9.0 only - DO NOT use higher version. We used 9.0.176. CUDA package for 9.0 is only supported by Ubuntu 16.04 - so do not use higher version. Also, do not use Debian. Similarly, current tensorflow support is restricted to cuDNN 7.0. DO NOT use higher version. We used 7.0.5. And as per tensorflow documentation - to avoid cuDNN version conflicts during later system upgrades, hold the cuDNN version at 7.0.5.
      
 - Software: 
      - You will need [TensorFlow](https://www.tensorflow.org/) (we used 1.0 for figures in papers, later versions also work with the provided code (we tested **TensorFlow versions 1.0 to 1.4**) for Python 3 with GPU support (otherwise training and running is very slow). Please check your CUDA and [TensorFlow installation](https://www.tensorflow.org/install/) with this line (below), and you can test that your GPU is being properly engaged with these additional [tips](https://www.tensorflow.org/programmers_guide/using_gpu).
 
       $ sess = tf.Session(config=tf.ConfigProto(log_device_placement=True))
 
-Please also install:
-     - Working environment: You may install an IDE and/or Jupyter Notebook. We worked directly on shell using virtualenv along with byobu/screen to connect and detach from session remotely via SSH
-     - You will also need to install the following Python packages (in the terminal type):
-      $ pip3 install scipy scikit-image matplotlib pyyaml easydict
-      $ pip3 install moviepy imageio tqdm tables
-      $ pip3 install pandas
+     - Please also install:
 
-     - Install video processing capability
-      $ sudo apt-get install ffmpeg
+        - Working environment: You may install an IDE and/or Jupyter Notebook. We worked directly on shell using virtualenv along with byobu/screen to connect and detach from session remotely via SSH
 
-     - Install python3-tk
-      $ sudo apt-get install python3-tk
+        - You will also need to install the following Python packages (in the terminal type):
+          $ pip3 install scipy scikit-image matplotlib pyyaml easydict
+          $ pip3 install moviepy imageio tqdm tables
+          $ pip3 install pandas
 
-     - We are working from an older version of the original code provided by Mathis et al. You can use either
-      $ # git clone https://github.com/AlexEMG/DeepLabCut.git # Original branch
-      $ git clone git@github.com:ayeshathanawalla/DeepLabCut.git # Chen lab modified version
+        - Install video processing capability
+          $ sudo apt-get install ffmpeg
+
+        - Install python3-tk
+          $ sudo apt-get install python3-tk
+
+        - We are working from an older version of the original code provided by Mathis et al. You can use either
+          $ # git clone https://github.com/AlexEMG/DeepLabCut.git # Original branch
+          $ git clone git@github.com:ayeshathanawalla/DeepLabCut.git # Chen lab modified version
       
 
 # Test the Toolbox installation & code:
