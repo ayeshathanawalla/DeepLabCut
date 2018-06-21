@@ -1,25 +1,25 @@
-"""
-DeepLabCut Toolbox
-https://github.com/AlexEMG/DeepLabCut
-A Mathis, alexander.mathis@bethgelab.org
-M Mathis, mackenzie@post.harvard.edu
+# """
+# DeepLabCut Toolbox
+# https://github.com/AlexEMG/DeepLabCut
+# A Mathis, alexander.mathis@bethgelab.org
+# M Mathis, mackenzie@post.harvard.edu
 
-This script generates a data structure in pandas, that contains the (relative)
-physical address of the image as well as the labels. These data are extracted
-from the "labeling.csv" files that can be generated in a different file e.g.
-ImageJ / Fiji
+# This script generates a data structure in pandas, that contains the (relative)
+# physical address of the image as well as the labels. These data are extracted
+# from the "labeling.csv" files that can be generated in a different file e.g.
+# ImageJ / Fiji
 
-Load data from individial folders with a Task and combine in one
-panda dataframe.
+# Load data from individial folders with a Task and combine in one
+# panda dataframe.
 
-Keys of panda frame:
-    - scorer
-    - bodypart
-    - x,y
+# Keys of panda frame:
+#     - scorer
+#     - bodypart
+#     - x,y
 
-The index is given by the file name / image name.
+# The index is given by the file name / image name.
 
-"""
+# """
 
 import numpy as np
 import pandas as pd
@@ -64,7 +64,7 @@ for scorer in Scorers:
 
     if DataSingleUser is None:
         for folder in folders:
-            # print("Loading folder ", folder)
+            print("Loading folder ", folder)
             os.chdir(folder)
             # sort image file names according to how they were stacked
             # files=np.sort([fn for fn in os.listdir(os.curdir)
@@ -81,11 +81,18 @@ for scorer in Scorers:
             frame, Frame = None, None
             for bodypart in bodyparts:
                 datafile = bodypart
+                print("Processing body part ", bodypart)
                 try:
-                    dframe = pd.read_csv(datafile + ".xls", sep='\t')
+                    dframe = pd.read_csv(datafile + '.csv')
                 except:
-                    os.rename(datafile + ".csv", datafile + ".xls")
-                    dframe = pd.read_csv(datafile + ".xls", sep='\t')
+                    dframe = pd.read_csv(datafile + '.xls', sep='\t')
+
+                # print("dframe.shape[0] ", dframe.shape[0])
+                # print("dframe.index ", dframe.index)
+                # print("len(imageaddress) ", len(imageaddress))
+                dframe_colnames = dframe.columns.values
+                dframe_colnames[0] = 'index'
+                # dframe.columns.values = dframe_colnames 
 
                 if dframe.shape[0] != len(imageaddress):
                     # Filling up with nans
@@ -98,7 +105,7 @@ for scorer in Scorers:
                 # print(frame.head())
                 # print(bodypart)
                 index = pd.MultiIndex.from_product(
-                    [[scorer], [bodypart], ['x', 'y']],
+                    [[scorer], [bodypart], ['X', 'Y']],
                     names=['scorer', 'bodyparts', 'coords'])
 
                 Xrescaled = dframe.X.values.astype(float)
