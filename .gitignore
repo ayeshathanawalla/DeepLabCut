@@ -98,8 +98,19 @@ ENV/
 # Rope project settings
 .ropeproject
 
-# mkdocs documentation
-/site
-
 # mypy
 .mypy_cache/
+
+# Ignore IDE and editor files
+.vscode/
+
+# Ignore data folders
+pose-tensorflow/models/*
+Generating_a_Training_Set/--recursion
+Generating_a_Training_Set/data*
+Generating_a_Training_Set/reaching*
+Generating_a_Training_Set/Unaugmented*
+Generating_a_Training_Set/IsCroppingOK.png
+IsCroppingOK.png
+Backup/
+Evaluation-Tools/Results/
